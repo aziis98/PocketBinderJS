@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Binder.js</title>
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>Hello [[ this.name ]]!</h1>
+
+        <label>
+            Name:
+            <input type="text" data-model="name" value="Orlando">
+        </label>
+
+        <br>
+        <br>
+
+        <div class="list"
+             data-repeat-person="this.people.filter(function(it) { return it.indexOf('c') != -1 })">
+            [[ (Number(this.__index) + Number(this.a)) ]]
+            <div class="item" id="item[[ this.__index ]]">
+                [[ this.person ]]
+            </div>
+        </div>
+
+        <div class="list" data-repeat-value-key="this.obj">
+            [[ this.key ]] - [[this.value]]
+        </div>
+
+        <br>
+        <br>
+
+        <label>
+            a:
+            <input type="number" data-model="a">
+        </label>
+
+        <br>
+
+        <label>
+            b:
+            <input type="number" data-model="b">
+        </label>
+
+        <p>The product of those two numbers is : [[ Number(this.a) * Number(this.b) ]]</p>
+
+        <button data-event-click="this.mybutton()">Bottone</button>
+
+    </div>
+
+    <script src="binder.js"></script>
+    <script>
+        PocketBinder.options.dataTagLeft = '[['
+        PocketBinder.options.dataTagRight = ']]'
+
+        var model = PocketBinder.from('.container')
+
+        model.people = [
+            'Antonio', 'Andrea', 'Ines', 'Federica', 'Rebecca'
+        ]
+
+        model.obj = {
+            a: 1,
+            b: 2,
+            c: 3
+        }
+
+        model.mybutton = function () {
+//            var body = document.querySelector('body')
+//                    body.appendChild(
+//                            document.createTextNode('My awnsome button has been clicked!'))
+//                    body.appendChild(
+//                            document.createElement('br'))
+
+            model.people.push('Francesca Rochira')
+            model.render()
+        }
+
+        model.render()
+    </script>
+</body>
+</html>
