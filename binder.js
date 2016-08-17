@@ -49,10 +49,10 @@ RegExp.escape= function(s) {
                 }
                 else if (modelNode.getAttribute('type') == 'number') {
 
-                    PocketBinder.eval(model, 'this.' + modelTarget + ' = "' + modelNode.value + '"')
+                    PocketBinder.eval(model, 'this.' + modelTarget + ' = Number("' + modelNode.value + '")')
 
                     modelNode.oninput = function () {
-                        PocketBinder.eval(model, 'this.' + modelTarget + ' = "' + modelNode.value + '"')
+                        PocketBinder.eval(model, 'this.' + modelTarget + ' = Number("' + modelNode.value + '")')
                         model.render()
                     }
                 }

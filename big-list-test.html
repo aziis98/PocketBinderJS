@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Big List Test</title>
+</head>
+<body>
+
+    <div class="container">
+
+        <label>
+            Search:
+            <input type="text" data-model="q">
+        </label>
+
+        <br>
+        <br>
+
+        <div class="list"
+             data-repeat-element="this.list.filter(this.func).slice(0, 10)">
+            [[ this.element ]]
+            <br>
+        </div>
+
+    </div>
+
+    <script src="binder.js"></script>
+    <script>
+        PocketBinder.options.dataTagLeft = '[['
+        PocketBinder.options.dataTagRight = ']]'
+
+        var model = PocketBinder.from('.container')
+
+        model.list = [ 'Haskell', 'Java', 'C', 'C++', 'Python', 'Ruby', 'Kotlin', 'Clojure', 'Scala', 'Groovy', 'Visual Basic', 'C#' ]
+
+        for (var i = 0; i < 300; i++) {
+            model.list.push(model.list[Math.floor(Math.random() * model.list.length)])
+        }
+
+        model.func = function (element) {
+            if (!model.q) return true
+
+            var r = false
+
+            model.q.split('').forEach(function (char) {
+                r = r || element.indexOf(char) != -1
+            })
+
+            return r
+        }
+
+        model.render()
+    </script>
+
+</body>
+</html>

@@ -22,8 +22,8 @@
         <br>
 
         <div class="list"
-             data-repeat-person="this.people.filter(function(it) { return it.indexOf('c') != -1 })">
-            [[ (Number(this.__index) + Number(this.a)) ]]
+             data-repeat-person="this.people">
+            [[ (this.__index + this.a) ]]
             <div class="item" id="item[[ this.__index ]]">
                 [[ this.person ]]
             </div>
@@ -48,7 +48,7 @@
             <input type="number" data-model="b">
         </label>
 
-        <p>The product of those two numbers is : [[ Number(this.a) * Number(this.b) ]]</p>
+        <p>The product of those two numbers is : [[ this.a * this.b ]]</p>
 
         <button data-event-click="this.mybutton()">Bottone</button>
 
@@ -72,12 +72,6 @@
         }
 
         model.mybutton = function () {
-//            var body = document.querySelector('body')
-//                    body.appendChild(
-//                            document.createTextNode('My awnsome button has been clicked!'))
-//                    body.appendChild(
-//                            document.createElement('br'))
-
             model.people.push('New Person')
             model.render()
         }
